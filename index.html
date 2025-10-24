@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erick & Guadalupe - Nuestra Boda Vaquera</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@700&family=Roboto:wght@300;400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #2c1810 0%, #5d4037 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Contenedor principal */
+        .invitation-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: linear-gradient(to bottom, #fdf8f3 0%, #f5e6d3 50%, #e8d4b8 100%);
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        /* Sección Hero Principal */
+        .hero-section {
+            position: relative;
+            padding: 60px 20px;
+            text-align: center;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" opacity="0.1"><path d="M0,200 Q300,100 600,200 T1200,200" stroke="%238B4513" stroke-width="2" fill="none"/><path d="M0,250 Q300,150 600,250 T1200,250" stroke="%23CD853F" stroke-width="1.5" fill="none"/></svg>') center/cover;
+        }
+
+        /* Decoración de cactus en las esquinas */
+        .cactus-left, .cactus-right {
+            position: absolute;
+            width: 80px;
+            height: 120px;
+            top: 20px;
+            opacity: 0.3;
+        }
+
+        .cactus-left {
+            left: 10px;
+        }
+
+        .cactus-right {
+            right: 10px;
+            transform: scaleX(-1);
+        }
+
+        .cactus-svg {
+            width: 100%;
+            height: 100%;
+            fill: #2d5016;
+        }
+
+        /* Títulos principales */
+        .main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 56px;
+            color: #8B4513;
+            margin: 20px 0;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.1);
+            animation: fadeInDown 1s ease;
+        }
+
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #CD853F;
+            font-style: italic;
+            margin: 10px 0;
+            animation: fadeInUp 1s ease 0.3s backwards;
+        }
+
+        .date-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #5d4037;
+            margin: 30px 0;
+            font-weight: 700;
+            animation: fadeInUp 1s ease 0.5s backwards;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Sección de fotos con diseño creativo */
+        .photo-section {
+            position: relative;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, transparent 0%, rgba(139, 69, 19, 0.05) 100%);
+        }
+
+        .photo-container {
+            position: relative;
+            margin: 40px auto;
+            max-width: 500px;
+        }
+
+        /* Marco de fotos estilo polaroid con decoración */
+        .photo-frame {
+            position: relative;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-frame:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .photo-frame.right {
+            transform: rotate(2deg);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #f0e6db 0%, #e8d4b8 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #8B4513;
+        }
+
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-caption {
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px;
+            color: #5d4037;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        /* Elementos decorativos flotantes */
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100px;
+            top: -50px;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            color: rgba(205, 133, 63, 0.6);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .heart:nth-child(2) { left: 30%; animation-delay: 0.5s; }
+        .heart:nth-child(3) { left: 50%; animation-delay: 1s; }
+        .heart:nth-child(4) { left: 70%; animation-delay: 1.5s; }
+        .heart:nth-child(5) { left: 90%; animation-delay: 2s; }
+
+        /* Decoración de herradura */
+        .horseshoe-decoration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .horseshoe-decoration::before,
+        .horseshoe-decoration::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #CD853F 50%, transparent 100%);
+        }
+
+        .horseshoe-decoration svg {
+            width: 60px;
+            height: 60px;
+            margin: 0 20px;
+            fill: #8B4513;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Sección de información */
+        .info-section {
+            padding: 60px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 2px solid #CD853F;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(205, 133, 63, 0.03) 10px,
+                rgba(205, 133, 63, 0.03) 20px
+            );
+            transform: rotate(45deg);
+        }
+
+        .info-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #8B4513;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-card p {
+            color: #5d4037;
+            font-size: 16px;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #CD853F 0%, #8B4513 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        }
+
+        /* Mapa interactivo */
+        .map-container {
+            position: relative;
+            margin: 40px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .map-placeholder {
+            height: 300px;
+            background: linear-gradient(135deg, #e8d4b8 0%, #f5e6d3 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .map-button {
+            background: linear-gradient(135deg, #8B4513 0%, #5d4037 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(139, 69, 19, 0.3);
+        }
+
+        .map-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
+        }
+
+        /* Contador regresivo mejorado */
+        .countdown-section {
+            padding: 60px 20px;
+            background: linear-gradient(180deg, rgba(139, 69, 19, 0.05) 0%, transparent 100%);
+        }
+
+        .countdown-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: #8B4513;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .countdown-item {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 80px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 2px solid #CD853F;
+        }
+
+        .countdown-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: #8B4513;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 14px;
+            color: #CD853F;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        /* Sección de confirmación */
+        .confirmation-section {
+            padding: 60px 30px;
+            background: linear-gradient(135deg, white 0%, #fdf8f3 100%);
+            text-align: center;
+        }
+
+        .whatsapp-button {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin: 20px auto;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .whatsapp-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        /* Detalles adicionales */
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        @media (min-width: 480px) {
+            .details-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .detail-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .detail-card h4 {
+            font-family: 'Playfair Display', serif;
+            color: #8B4513;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .detail-card p {
+            color: #5d4037;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Footer romántico */
+        .footer-section {
+            padding: 60px 30px;
+            background: linear-gradient(180deg, transparent 0%, rgba(139, 69, 19, 0.1) 100%);
+            text-align: center;
+        }
+
+        .bible-quote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #8B4513;
+            font-size: 20px;
+            margin: 20px 0;
+            padding: 20px;
+            border-left: 4px solid #CD853F;
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .bible-reference {
+            font-size: 14px;
+            color: #CD853F;
+            margin-top: 10px;
+        }
+
+        /* Decoración final */
+        .final-decoration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 0;
+            gap: 20px;
+        }
+
+        .star {
+            font-size: 24px;
+            color: #CD853F;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .star:nth-child(2) { animation-delay: 0.3s; }
+        .star:nth-child(3) { animation-delay: 0.6s; }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 42px;
+            }
+            
+            .date-text {
+                font-size: 24px;
+            }
+            
+            .countdown-container {
+                gap: 10px;
+            }
+            
+            .countdown-item {
+                min-width: 70px;
+                padding: 15px 10px;
+            }
+            
+            .countdown-number {
+                font-size: 28px;
+            }
+        }
+
+        /* Bordes decorativos */
+        .rope-border {
+            height: 40px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40"><path d="M0 20 Q 25 10, 50 20 T 100 20 T 150 20 T 200 20" stroke="%23CD853F" stroke-width="3" fill="none"/><path d="M0 25 Q 25 15, 50 25 T 100 25 T 150 25 T 200 25" stroke="%23A0522D" stroke-width="2" fill="none"/></svg>') repeat-x center;
+            background-size: 200px 40px;
+            margin: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="invitation-container">
+        <!-- SECCIÓN HERO PRINCIPAL -->
+        <section class="hero-section">
+            <!-- Decoraciones de cactus -->
+            <div class="cactus-left">
+                <svg class="cactus-svg" viewBox="0 0 80 120">
+                    <path d="M40 20 Q 35 10, 35 100 Q 35 110, 40 110 Q 45 110, 45 100 Q 45 10, 40 20"/>
+                    <path d="M20 40 Q 15 35, 15 60 Q 15 65, 20 65 Q 25 65, 25 60 Q 25 45, 35 50"/>
+                    <path d="M60 50 Q 65 45, 65 70 Q 65 75, 60 75 Q 55 75, 55 70 Q 55 55, 45 60"/>
+                    <circle cx="38" cy="30" r="3" fill="#ffeb3b"/>
+                    <circle cx="42" cy="45" r="2" fill="#ff9800"/>
+                </svg>
+            </div>
+            
+            <div class="cactus-right">
+                <svg class="cactus-svg" viewBox="0 0 80 120">
+                    <path d="M40 20 Q 35 10, 35 100 Q 35 110, 40 110 Q 45 110, 45 100 Q 45 10, 40 20"/>
+                    <path d="M20 40 Q 15 35, 15 60 Q 15 65, 20 65 Q 25 65, 25 60 Q 25 45, 35 50"/>
+                    <path d="M60 50 Q 65 45, 65 70 Q 65 75, 60 75 Q 55 75, 55 70 Q 55 55, 45 60"/>
+                    <circle cx="38" cy="30" r="3" fill="#ffeb3b"/>
+                    <circle cx="42" cy="45" r="2" fill="#ff9800"/>
+                </svg>
+            </div>
+
+            <div class="subtitle">Con la bendición de Dios</div>
+            <h1 class="main-title">Erick & Guadalupe</h1>
+            <div class="subtitle">te invitan a su boda</div>
+            
+            <div class="rope-border"></div>
+            
+            <div class="date-text">
+                🤠 Sábado 14 de Febrero 2026 🤠<br>
+                <span style="font-size: 18px; font-weight: 400;">2:00 PM</span>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE FOTO PRINCIPAL -->
+        <section class="photo-section">
+            <div class="floating-hearts">
+                <span class="heart">💕</span>
+                <span class="heart">❤️</span>
+                <span class="heart">💕</span>
+                <span class="heart">❤️</span>
+                <span class="heart">💕</span>
+            </div>
+            
+            <div class="photo-container">
+                <div class="photo-frame">
+                    <div class="photo-placeholder">
+                        <img src="el.jpg" alt="Erick y Guadalupe">
+                    </div>
+                    <div class="photo-caption">Nuestra historia de amor</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE INFORMACIÓN DE LA CEREMONIA -->
+        <section class="info-section">
+            <div class="info-card">
+                <div class="icon-wrapper">⛪</div>
+                <h3>Ceremonia Religiosa</h3>
+                <p>
+                    <strong>Cabaña de adobe</strong><br>
+                    CAMINO A ALA TRINIDAD<br>
+                    TEQUISQUIAPAN, Querétaro<br>
+                    <span style="font-size: 20px; margin-top: 10px; display: block;">2:00 PM</span>
+                </p>
+            </div>
+
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <div style="font-size: 48px; margin-bottom: 20px;">📍</div>
+                    <a href="https://maps.app.goo.gl/QcrJKRTcgRGZMgpH8?g_st=aw" 
+                       target="_blank" 
+                       class="map-button">
+                        <span>Ver ubicación en Google Maps</span>
+                        <span>→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEGUNDA FOTO CREATIVA -->
+        <section class="photo-section">
+            <div class="photo-container">
+                <div class="photo-frame right">
+                    <div class="photo-placeholder">
+                        <img src="chsi.webp" alt="Momento divertido en la iglesia">
+                    </div>
+                    <div class="photo-caption">Listos para la aventura</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE RECEPCIÓN -->
+        <section class="info-section" style="background: rgba(205, 133, 63, 0.05);">
+            <div class="info-card">
+                <div class="icon-wrapper">🎊</div>
+                <h3>Recepción</h3>
+                <p>
+                    <strong>Mismo lugar que la ceremonia</strong><br>
+                    CAMINO A ALA TRINIDAD <br>
+                    TEQUISQUIAPAN, Querétaro<br>
+                    <span style="font-size: 18px; margin-top: 15px; display: block;">
+                        Inmediatamente después de la ceremonia<br>
+                        ¡Celebremos juntos! 🌟
+                    </span>
+                </p>
+            </div>
+
+            <div class="horseshoe-decoration" style="margin: 40px 0;">
+                <svg viewBox="0 0 60 60">
+                    <path d="M 10 50 Q 10 10, 30 10 Q 50 10, 50 50" stroke="#8B4513" stroke-width="5" fill="none"/>
+                    <circle cx="15" cy="45" r="3" fill="#5d4037"/>
+                    <circle cx="45" cy="45" r="3" fill="#5d4037"/>
+                    <circle cx="20" cy="35" r="2" fill="#5d4037"/>
+                    <circle cx="40" cy="35" r="2" fill="#5d4037"/>
+                    <circle cx="25" cy="25" r="2" fill="#5d4037"/>
+                    <circle cx="35" cy="25" r="2" fill="#5d4037"/>
+                </svg>
+            </div>
+        </section>
+
+        <!-- CONTADOR REGRESIVO -->
+        <section class="countdown-section">
+            <h2 class="countdown-title">⏰ Cuenta Regresiva ⏰</h2>
+            <div class="countdown-container">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">0</span>
+                    <span class="countdown-label">Días</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">0</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">0</span>
+                    <span class="countdown-label">Min</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">0</span>
+                    <span class="countdown-label">Seg</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- TERCERA FOTO CREATIVA -->
+        <section class="photo-section">
+            <div class="photo-container">
+                <div class="photo-frame">
+                    <div class="photo-placeholder">
+                        <img src="bodavq.jpg" alt="Temática vaquera con los amigos">
+                    </div>
+                    <div class="photo-caption">¡Yeehaw! Amor vaquero</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE CONFIRMACIÓN -->
+        <section class="confirmation-section">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; color: #8B4513; margin-bottom: 30px;">
+                💌 Confirma tu Asistencia
+            </h2>
+            
+            <p style="font-size: 18px; color: #5d4037; margin-bottom: 30px;">
+                Tu presencia es muy importante para nosotros 🤠<br>
+                Por favor confirma antes del <strong>1 de febrero de 2026</strong>
+            </p>
+            
+            <a href="https://wa.me/524273367706?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20la%20boda%20vaquera%20de%20Erick%20y%20Guadalupe%20el%2014%20de%20febrero%202026%20🤠" 
+               target="_blank" 
+               class="whatsapp-button">
+                <span style="font-size: 24px;">💬</span>
+                <span>Confirmar por WhatsApp</span>
+            </a>
+        </section>
+
+        <!-- DETALLES ADICIONALES -->
+        <section class="info-section">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; color: #8B4513; margin-bottom: 40px; text-align: center;">
+                Información Importante
+            </h2>
+            
+            <div class="details-grid">
+                <div class="detail-card">
+                    <div style="font-size: 36px; margin-bottom: 15px;">👔</div>
+                    <h4>Código de Vestimenta</h4>
+                    <p>
+                        <strong>FORMAL VAQUERO</strong><br>
+                        Sombreros, botas y cinturones vaqueros son bienvenidos
+                    </p>
+                </div>
+                
+                <div class="detail-card">
+                    <div style="font-size: 36px; margin-bottom: 15px;">🎵</div>
+                    <h4>Música y Baile</h4>
+                    <p>
+                        Banda en vivo<br>
+                        DJ hasta el amanecer<br>
+                        ¡Prepárate para bailar! 💃🕺
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="rope-border"></div>
+
+        <!-- CUARTA FOTO CREATIVA -->
+        <section class="photo-section">
+            <div class="photo-container">
+                <div class="photo-frame right">
+                    <div class="photo-placeholder">
+                        <img src="el.jpg" alt="Erick y Guadalupe juntos">
+                    </div>
+                    <div class="photo-caption">Por siempre juntos</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER CON VERSÍCULO -->
+        <section class="footer-section">
+            <div class="bible-quote">
+                "El amor es paciente, es bondadoso. El amor no es envidioso ni jactancioso ni orgulloso"
+                <div class="bible-reference">1 Corintios 13:4</div>
+            </div>
+            
+            <div class="final-decoration">
+                <span class="star">⭐</span>
+                <span class="star">⭐</span>
+                <span class="star">⭐</span>
+            </div>
+            
+            <p style="font-family: 'Dancing Script', cursive; font-size: 36px; color: #8B4513; margin: 30px 0;">
+                Erick & Guadalupe
+            </p>
+            
+            <p style="color: #CD853F; font-size: 16px;">
+                14.02.2026<br>
+                #ErickYGuadalupeParaSiempre 🤠❤️
+            </p>
+        </section>
+    </div>
+
+    <script>
+        // Contador regresivo
+        const weddingDate = new Date('2026-02-14T14:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                document.querySelector('.countdown-container').innerHTML = 
+                    '<div style="text-align: center; font-size: 32px; color: #8B4513; font-family: \'Dancing Script\', cursive;">¡Es hoy! 🎉🤠❤️</div>';
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Animación suave al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observar elementos para animación
+        document.querySelectorAll('.info-card, .photo-frame, .detail-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Efecto parallax suave para las fotos
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.photo-frame');
+            
+            parallaxElements.forEach((el, index) => {
+                const speed = index % 2 === 0 ? 0.5 : -0.5;
+                el.style.transform = `translateY(${scrolled * speed * 0.1}px) rotate(${index % 2 === 0 ? '-2deg' : '2deg'})`;
+            });
+        });
+    </script>
+</body>
+</html>
